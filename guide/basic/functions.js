@@ -217,3 +217,76 @@ var getCode = (function() {
 
 getCode();
 
+// Arguments object
+
+function myConcat(separator) {
+	var result = '';
+	var i;
+
+	for (i = 1; i < arguments.length; i++) {
+		result += arguments[i] + separator;
+	}
+	return result;
+}
+
+myConcat(', ', 'red', 'orange', 'blue');
+
+
+// Default parameters
+
+function multiply(a, b) {
+	b = typeof b !== 'undefined' ? b : 1;
+
+	return a * b;
+}
+
+multiply(5);
+
+function multiply2(a, b = 1) {
+	return a * b;
+}
+
+multiply2(5);
+
+
+// Rest parameters
+
+function multiply3(multiplier, ...theArgs) {
+	return theArgs.map(x => multiplier * x);
+}
+
+var arr = multiply3(2, 1, 2, 3);
+console.log(arr);
+
+
+// Shorter functions
+
+var ar = [
+		 'Hydrogen',
+		 'Helium',
+		 'Lithium',
+		 'Beryllim'
+	];
+
+var ar2 = ar.map(function(s) { return s.length; });
+
+console.log(ar2);
+
+var ar3 = ar.map(s => s.length);
+
+console.log(ar3);
+
+
+// Lexical this
+
+function Person() {
+	var self = this;
+
+	self.age = 0;
+
+	setInternal(function growUp() {
+		self.age++;
+	}, 1000);
+}
+
+var p = new Person();
